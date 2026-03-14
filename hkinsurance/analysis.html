@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公司分析 - 香港保险分析工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f8fafc;color:#1e293b;padding:20px;line-height:1.6}
+.hero{background:linear-gradient(135deg,#1e3a8a,#312e81);color:#fff;padding:30px;border-radius:12px;margin-bottom:20px}
+h1{font-size:28px;margin-bottom:10px}
+.card{background:#fff;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+input,select{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px;font-size:14px}
+input[type=range]{padding:0;height:6px}
+.comp{display:inline-block;padding:10px 20px;margin:5px;border:2px solid #ddd;border-radius:8px;cursor:pointer}
+.comp.active{border-color:#1e3a8a;background:#f0f9ff;font-weight:600}
+.comp.aia.active{border-color:#dc2626;color:#dc2626}
+.comp.pru.active{border-color:#2563eb;color:#2563eb}
+.comp.sun.active{border-color:#ea580c;color:#ea580c}
+.comp.man.active{border-color:#16a34a;color:#16a34a}
+.results{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);padding:20px;border-radius:10px;border:1px solid #bae6fd}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.result-box{background:#fff;padding:15px;border-radius:8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.result-box .num{font-size:24px;font-weight:700;color:#1e3a8a}
+.result-box .label{font-size:12px;color:#64748b;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:15px}
+th,td{padding:12px;border-bottom:1px solid #e2e8f0;text-align:left}
+th{background:#f8fafc;font-weight:600}
+.tag{display:inline-block;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600}
+.tag-aia{background:#fee2e2;color:#dc2626}
+.tag-pru{background:#dbeafe;color:#2563eb}
+.tag-sun{background:#ffedd5;color:#ea580c}
+.tag-man{background:#d1fae5;color:#16a34a}
+.info{background:#eff6ff;border-left:4px solid #3b82f6;padding:15px;margin:15px 0;border-radius:0 8px 8px 0}
+.warn{background:#fffbeb;border-left-color:#f59e0b}
+.nav{background:#fff;padding:15px 20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:flex;gap:20px;flex-wrap:wrap}
+.nav a{text-decoration:none;color:#64748b;padding:8px 16px;border-radius:6px;transition:all 0.3s}
+.nav a:hover{background:#f1f5f9;color:#1e3a8a}
+.nav a.active{background:#1e3a8a;color:#fff}
+.footer{text-align:center;padding:20px;color:#64748b;font-size:14px;margin-top:20px}
+
+.chart-bar{height:20px;background:#e2e8f0;border-radius:10px;margin:10px 0;overflow:hidden}
+.chart-fill{height:100%;border-radius:10px;transition:width 0.5s}
+.fill-aia{background:#dc2626}
+.fill-pru{background:#2563eb}
+.fill-sun{background:#ea580c}
+.fill-man{background:#16a34a}
+.metric{display:flex;justify-content:space-between;align-items:center;margin:8px 0;font-size:14px}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>香港保险产品分析工具</h1>
+<p>2025年分红实现率数据 | 完全离线使用</p>
+</div>
+<div class="nav"><a href="index.html" class="">收益计算器</a><a href="compare.html" class="">产品对比</a><a href="analysis.html" class="active">公司分析</a><a href="knowledge.html" class="">知识库</a></div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">2025年分红实现率数据</h3>
+<table>
+<tr><th>保险公司</th><th>周年红利</th><th>归原红利</th><th>终期红利</th><th>特点</th></tr>
+<tr><td><b>友邦 AIA</b></td><td>89%</td><td>92%</td><td>102%</td><td>稳定性最佳</td></tr>
+<tr><td><b>保诚</b></td><td>80%</td><td>81%</td><td>78%</td><td>波动性较高</td></tr>
+<tr><td><b>永明</b></td><td>83%</td><td>95%</td><td>84%</td><td>长期稳健</td></tr>
+<tr><td><b>宏利</b></td><td>77%</td><td>-</td><td>107%</td><td>终期红利突出</td></tr>
+</table>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">分红实现率可视化</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
+<div>
+<h4 style="margin-bottom:15px">周年红利实现率</h4>
+<div class="metric"><span>友邦 AIA</span><span style="color:#dc2626;font-weight:600">89%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-aia" style="width:89%"></div></div>
+<div class="metric"><span>永明</span><span style="color:#ea580c;font-weight:600">83%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-sun" style="width:83%"></div></div>
+<div class="metric"><span>保诚</span><span style="color:#2563eb;font-weight:600">80%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-pru" style="width:80%"></div></div>
+<div class="metric"><span>宏利</span><span style="color:#16a34a;font-weight:600">77%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-man" style="width:77%"></div></div>
+</div>
+<div>
+<h4 style="margin-bottom:15px">终期红利实现率</h4>
+<div class="metric"><span>宏利</span><span style="color:#16a34a;font-weight:600">107%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-man" style="width:100%"></div></div>
+<div class="metric"><span>友邦 AIA</span><span style="color:#dc2626;font-weight:600">102%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-aia" style="width:95%"></div></div>
+<div class="metric"><span>永明</span><span style="color:#ea580c;font-weight:600">84%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-sun" style="width:78%"></div></div>
+<div class="metric"><span>保诚</span><span style="color:#2563eb;font-weight:600">78%</span></div>
+<div class="chart-bar"><div class="chart-fill fill-pru" style="width:73%"></div></div>
+</div>
+</div>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">情景模拟 (不同分红实现率假设)</h3>
+<table>
+<tr><th>持有年期</th><th>友邦 (乐观/基准/悲观)</th><th>保诚 (乐观/基准/悲观)</th><th>永明 (乐观/基准/悲观)</th></tr>
+<tr><td>10年</td><td>4.2% / 3.2% / 2.1%</td><td>4.0% / 3.0% / 1.8%</td><td>3.8% / 2.8% / 1.6%</td></tr>
+<tr><td>20年</td><td>6.1% / 5.2% / 3.8%</td><td>5.9% / 5.0% / 3.5%</td><td>5.7% / 4.8% / 3.2%</td></tr>
+<tr><td>30年</td><td>6.8% / 6.1% / 4.5%</td><td>6.7% / 6.0% / 4.3%</td><td>6.9% / 5.9% / 4.4%</td></tr>
+</table>
+<div class="info">
+<b>🛡️ 平滑机制:</b> 保险公司在投资收益好的年份储备盈余，在低迷年份释放储备以稳定分红。即使某年投资表现不佳，分红实现率也不会立即大幅下降。
+</div>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">公司财务实力对比</h3>
+<table>
+<tr><th>指标</th><th>友邦 AIA</th><th>保诚</th><th>永明</th><th>宏利</th></tr>
+<tr><td>偿付能力充足率</td><td>350%</td><td>320%</td><td>340%</td><td>310%</td></tr>
+<tr><td>标普评级</td><td>AA-</td><td>A+</td><td>AA-</td><td>A+</td></tr>
+<tr><td>穆迪评级</td><td>Aa2</td><td>A1</td><td>Aa3</td><td>A1</td></tr>
+<tr><td>成立年份</td><td>1919年</td><td>1848年</td><td>1865年</td><td>1887年</td></tr>
+<tr><td>香港业务历史</td><td>90+年</td><td>170+年</td><td>130+年</td><td>125+年</td></tr>
+</table>
+</div>
+<div class="footer">© 2025 香港保险分析工具 | 数据仅供参考，投资有风险</div>
+</body>
+</html>

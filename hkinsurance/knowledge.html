@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识库 - 香港保险分析工具</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#f8fafc;color:#1e293b;padding:20px;line-height:1.6}
+.hero{background:linear-gradient(135deg,#1e3a8a,#312e81);color:#fff;padding:30px;border-radius:12px;margin-bottom:20px}
+h1{font-size:28px;margin-bottom:10px}
+.card{background:#fff;padding:20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+input,select{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px;font-size:14px}
+input[type=range]{padding:0;height:6px}
+.comp{display:inline-block;padding:10px 20px;margin:5px;border:2px solid #ddd;border-radius:8px;cursor:pointer}
+.comp.active{border-color:#1e3a8a;background:#f0f9ff;font-weight:600}
+.comp.aia.active{border-color:#dc2626;color:#dc2626}
+.comp.pru.active{border-color:#2563eb;color:#2563eb}
+.comp.sun.active{border-color:#ea580c;color:#ea580c}
+.comp.man.active{border-color:#16a34a;color:#16a34a}
+.results{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);padding:20px;border-radius:10px;border:1px solid #bae6fd}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.result-box{background:#fff;padding:15px;border-radius:8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.result-box .num{font-size:24px;font-weight:700;color:#1e3a8a}
+.result-box .label{font-size:12px;color:#64748b;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:15px}
+th,td{padding:12px;border-bottom:1px solid #e2e8f0;text-align:left}
+th{background:#f8fafc;font-weight:600}
+.tag{display:inline-block;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:600}
+.tag-aia{background:#fee2e2;color:#dc2626}
+.tag-pru{background:#dbeafe;color:#2563eb}
+.tag-sun{background:#ffedd5;color:#ea580c}
+.tag-man{background:#d1fae5;color:#16a34a}
+.info{background:#eff6ff;border-left:4px solid #3b82f6;padding:15px;margin:15px 0;border-radius:0 8px 8px 0}
+.warn{background:#fffbeb;border-left-color:#f59e0b}
+.nav{background:#fff;padding:15px 20px;border-radius:12px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:flex;gap:20px;flex-wrap:wrap}
+.nav a{text-decoration:none;color:#64748b;padding:8px 16px;border-radius:6px;transition:all 0.3s}
+.nav a:hover{background:#f1f5f9;color:#1e3a8a}
+.nav a.active{background:#1e3a8a;color:#fff}
+.footer{text-align:center;padding:20px;color:#64748b;font-size:14px;margin-top:20px}
+
+.term-card{background:#f8fafc;padding:20px;border-radius:10px;margin-bottom:15px;border-left:4px solid #1e3a8a}
+.term-card h4{color:#1e3a8a;margin-bottom:8px}
+.term-card p{color:#64748b;font-size:14px;line-height:1.8}
+.link-box{background:#fff;border:1px solid #e2e8f0;padding:15px;border-radius:8px;margin:10px 0;display:flex;justify-content:space-between;align-items:center}
+.link-box a{color:#2563eb;text-decoration:none;font-weight:600}
+.link-box a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>香港保险产品分析工具</h1>
+<p>2025年分红实现率数据 | 完全离线使用</p>
+</div>
+<div class="nav"><a href="index.html" class="">收益计算器</a><a href="compare.html" class="">产品对比</a><a href="analysis.html" class="">公司分析</a><a href="knowledge.html" class="active">知识库</a></div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">专业术语解释</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+<div class="term-card">
+<h4>分红实现率</h4>
+<p>实际派发红利与预期红利的比率。100%表示完全达标，超过100%表示超预期，低于100%表示未达标。</p>
+</div>
+<div class="term-card">
+<h4>复归/归原红利</h4>
+<p>英式分红核心，每年公布面值，一旦公布即成为保证，不会减少。适合追求稳定收益的投资者。</p>
+</div>
+<div class="term-card">
+<h4>终期红利</h4>
+<p>保单终止时（退保、理赔或期满）一次性发放，波动较大，每年重新宣告，可能上升或下降。</p>
+</div>
+<div class="term-card">
+<h4>IRR (内部收益率)</h4>
+<p>考虑时间价值的年化复合收益率，是评估保险产品真实回报的最佳指标。</p>
+</div>
+<div class="term-card">
+<h4>保证部分 vs 非保证部分</h4>
+<p>保证部分：写入合同，100%确定给付。<br>非保证部分：取决于分红实现率，存在不确定性。</p>
+</div>
+<div class="term-card">
+<h4>平滑机制</h4>
+<p>保险公司设立分红储备账户，在投资收益好的年份储备盈余，在低迷年份释放储备以稳定分红。</p>
+</div>
+</div>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">2025年监管新规</h3>
+<ul style="padding-left:20px;line-height:2.2">
+<li><b>演示利率上限：</b>港元产品6%，非港元产品6.5%</li>
+<li><b>披露要求：</b>每年6月30日前统一公布分红实现率</li>
+<li><b>透明度：</b>需披露投资策略、资产类别、地域组合</li>
+<li><b>问责制：</b>董事局对非保证利益负最终责任</li>
+<li><b>冷静期：</b>投保后21天内可无条件退保，全额退款</li>
+<li><b>说明义务：</b>必须清楚解释保证与非保证部分的区别</li>
+</ul>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">分红实现率查询链接</h3>
+<div class="link-box">
+<div>
+<div style="font-weight:600">友邦 AIA</div>
+<div style="font-size:12px;color:#64748b">官方分红实现率查询页面</div>
+</div>
+<a href="https://www.aia.com.hk/zh-hk/products/further-product-information/participating-products/fulfillment-ratio" target="_blank">访问官网 →</a>
+</div>
+<div class="link-box">
+<div>
+<div style="font-weight:600">保诚 Prudential</div>
+<div style="font-size:12px;color:#64748b">官方分红实现率查询页面</div>
+</div>
+<a href="https://www.prudential.com.hk/performance/fulfillment-ratio/tc/" target="_blank">访问官网 →</a>
+</div>
+<div class="link-box">
+<div>
+<div style="font-weight:600">宏利 Manulife</div>
+<div style="font-size:12px;color:#64748b">官方分红实现率查询页面</div>
+</div>
+<a href="https://www.manulife.com.hk/zh-hk/individual/products/understanding-your-participating-policy/fulfillment-ratio.html" target="_blank">访问官网 →</a>
+</div>
+<div class="link-box">
+<div>
+<div style="font-weight:600">永明 Sun Life</div>
+<div style="font-size:12px;color:#64748b">永明金融香港官网</div>
+</div>
+<a href="https://www.sunlife.com.hk/HK/Insurance/Savings+and+life+insurance/Savings+and+life+insurance.htm?vgnLocale=zh_TW" target="_blank">访问官网 →</a>
+</div>
+</div>
+<div class="card">
+<h3 style="color:#1e3a8a;margin-bottom:15px">投保注意事项</h3>
+<div class="info">
+<b>📝 购买前必读:</b>
+<ul style="margin-top:10px;padding-left:20px">
+<li>分红实现率仅供参考，不代表未来表现</li>
+<li>非保证部分可能受市场波动影响</li>
+<li>提前退保可能产生损失</li>
+<li>建议持有至少10年以上以获得合理回报</li>
+<li>仔细阅读产品说明书和利益说明文件</li>
+<li>如有疑问，咨询专业理财顾问</li>
+</ul>
+</div>
+</div>
+<div class="footer">© 2025 香港保险分析工具 | 数据仅供参考，投资有风险</div>
+</body>
+</html>

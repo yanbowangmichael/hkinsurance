@@ -1,0 +1,8 @@
+# Netlify redirects
+# 确保SPA路由正常工作（如果需要）
+
+# 可选：自定义域名重定向
+# https://你的域名.com/*    https://www.你的域名.com/:splat    301!
+
+# 可选：404页面
+# /*    /404.html    404
